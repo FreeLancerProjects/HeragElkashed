@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/cons_typing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@id/ll_msg_container"
+
+
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_chat_user"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edt_bg"
+            app:layout_constraintBottom_toBottomOf="@id/image_chat_user"
+            app:layout_constraintEnd_toStartOf="@id/image_chat_user"
+            app:layout_constraintTop_toTopOf="@id/image_chat_user"
+
+
+            >
+
+            <com.eyalbira.loadingdots.LoadingDots
+                android:id="@+id/wait_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:LoadingDots_auto_play="true"
+                app:LoadingDots_dots_color="@color/gray4"
+                app:LoadingDots_dots_count="3"
+                app:LoadingDots_dots_size="6dp"
+                app:LoadingDots_dots_space="2dp"
+                app:LoadingDots_jump_height="4dp"
+                app:LoadingDots_loop_duration="800"
+                app:LoadingDots_loop_start_delay="100"
+                app:LoadingDots_jump_duration="200"
+                >
+
+            </com.eyalbira.loadingdots.LoadingDots>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

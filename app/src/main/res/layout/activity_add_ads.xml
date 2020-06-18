@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+    <data>
+        <variable
+            name="backListener"
+            type="com.creative.share.apps.heragelkashed.interfaces.Listeners.BackListener" />
+
+        <variable
+            name="lang"
+            type="String" />
+        <variable
+            name="addAdModel"
+            type="com.creative.share.apps.heragelkashed.models.AddAdModel" />
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/gray1"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->backListener.back()}"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:padding="8dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_left_arrow"
+                        android:tint="@color/white" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:text="@string/add_ads"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:fitsSystemWindows="true"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    >
+                    <FrameLayout
+                        android:id="@+id/tabContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        >
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center_horizontal"
+                            >
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/pager"
+                                android:layout_width="250dp"
+                                android:layout_height="250dp"
+                                android:layout_gravity="center_horizontal"
+                                />
+                            <com.google.android.material.tabs.TabLayout
+                                android:id="@+id/tabLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="5dp"
+                                app:tabGravity="fill"
+                                app:tabMode="auto"
+                                app:tabIndicatorHeight="0dp"
+                                app:tabMaxWidth="5dp"
+                                app:tabMinWidth="5dp"
+                                app:tabBackground="@drawable/indicator"
+                                android:layout_marginTop="8dp"
+
+                                />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:weightSum="2"
+
+                                >
+                                <LinearLayout
+                                    android:id="@+id/llAddPhoto"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:background="@color/colorPrimary"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+
+                                    >
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:src="@drawable/ic_add_ads"
+                                        android:tint="@color/white"
+                                        android:padding="5dp"
+                                        android:clickable="false"
+                                        android:longClickable="false"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp"
+                                        android:text="@string/add_photo"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:clickable="false"
+                                        android:longClickable="false"
+
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/llDeletePhoto"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:background="@color/colorPrimary"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    >
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:src="@drawable/ic_delete"
+                                        android:tint="@color/white"
+                                        android:padding="5dp"
+                                        android:clickable="false"
+                                        android:longClickable="false"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp"
+                                        android:text="@string/delete"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:clickable="false"
+                                        android:longClickable="false"
+                                        />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+                    <LinearLayout
+                        android:id="@+id/selectImageContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="15dp"
+                        >
+                        <ImageView
+                            android:id="@+id/selectImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/circle_add"
+                            android:src="@drawable/ic_add_ads"
+                            android:tint="@color/white"
+                            android:padding="20dp"
+                            android:layout_marginTop="20dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:text="@string/add_photo"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:text="@string/please_add_at_least_one_image_the_more_pictures_you_add_the_more_chances_the_customer_will_buy_the_product"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/category"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/edt_bg"
+                        >
+                        <Spinner
+                            android:id="@+id/spinnerCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            app:backgroundTint="@color/black"
+                            />
+                    </FrameLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/sub_category"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/edt_bg"
+                        >
+                        <Spinner
+                            android:id="@+id/spinnerSubSubCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            app:backgroundTint="@color/black"
+                            />
+                    </FrameLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/ad_types"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/edt_bg"
+                        >
+                        <Spinner
+                            android:id="@+id/spinnerType"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            app:backgroundTint="@color/black"
+                            />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/city"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/llCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:background="@drawable/edt_bg"
+
+                        >
+                        <TextView
+                            android:id="@+id/tvCity"
+                            android:layout_width="0dp"
+                            android:layout_weight=".85"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:hint="@string/ch_city"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="14sp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:textColor="@color/black"
+
+                            />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight=".15"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_right_arrow"
+                            android:padding="15dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
+                            android:clickable="false"
+                            android:longClickable="false"
+                            />
+                    </LinearLayout>
+
+                    <!--
+                                        <FrameLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:layout_marginTop="8dp"
+                                            android:background="@drawable/edt_bg"
+                                            >
+                                            &lt;!&ndash;<Spinner
+                                                android:id="@+id/spinnerCity"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+
+                                                android:layout_marginLeft="8dp"
+                                                android:layout_marginRight="8dp"
+                                                app:backgroundTint="@color/black"
+                                                />&ndash;&gt;
+
+
+
+                                        </FrameLayout>
+                    -->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/catogry_filters"
+                        />
+                    <LinearLayout
+                        android:id="@+id/llFilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:background="@drawable/edt_bg"
+
+                        >
+                        <TextView
+                            android:id="@+id/tvFilter"
+                            android:layout_width="0dp"
+                            android:layout_weight=".85"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/catogry_filters"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="14sp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight=".15"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_right_arrow"
+                            android:padding="15dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
+                            android:clickable="false"
+                            android:longClickable="false"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/ad_name"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edt_bg"
+                        android:layout_marginTop="5dp"
+                        android:hint="@string/ad_name"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp"
+                        android:text="@={addAdModel.ad_name}"
+                        error="@{addAdModel.error_name}"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/ad_price"
+
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edt_bg"
+                        android:layout_marginTop="5dp"
+                        android:hint="@string/ad_price"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp"
+                        android:inputType="numberDecimal"
+                        android:text="@={addAdModel.ad_price}"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="@string/ad_details"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@drawable/edt_bg"
+                        android:layout_marginTop="5dp"
+                        android:hint="@string/ad_details"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:text="@={addAdModel.ad_details}"
+                        error="@{addAdModel.error_details}"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="30dp"
+
+                        >
+                        <fragment
+                            android:id="@+id/map"
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp"
+                            android:name="com.creative.share.apps.heragelkashed.activities_fragments.activity_add_company.FragmentMapTouchListener"
+
+                            />
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            >
+
+
+                            <EditText
+                                android:id="@+id/edt_address"
+
+                                android:layout_width="0dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:hint="@string/select_location_on_map"
+                                android:singleLine="true"
+                                android:textSize="13sp"
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/edt_map"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp"
+                                android:layout_gravity="center_vertical"
+                                android:textColorHint="@color/gray4"
+                                android:text="@={addAdModel.address}"
+                                error="@{addAdModel.error_address}"
+
+
+                                />
+
+                            <ImageView
+
+                                android:id="@+id/imageSearch"
+                                android:layout_width="45dp"
+                                android:layout_height="35dp"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_search"
+                                android:tint="@color/black"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/edt_map"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+
+
+                                />
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <Button
+                        android:id="@+id/btnAddAd"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/shape_data"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:text="@string/add_ads"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:text="@string/the_more_you_enter_the_correct_ad_information"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <include layout="@layout/bottom_sheet_image" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

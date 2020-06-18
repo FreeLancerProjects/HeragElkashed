@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="reasonModel"
+            type="com.creative.share.apps.heragelkashed.models.ReportReasonDataModel.ReportReasonModel" />
+    </data>
+    <RadioButton
+        android:id="@+id/rb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textSize="13sp"
+        android:text="@{reasonModel.title}"
+        android:button="@drawable/rb_bg"
+        />
+</layout>
