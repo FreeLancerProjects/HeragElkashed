@@ -144,7 +144,7 @@ public class Fragment_Code_Verification extends Fragment {
         };
         PhoneAuthProvider.getInstance()
                 .verifyPhoneNumber(
-                        userModel.getMobile_code().replace("+","00")+userModel.getMobile_number(),
+                        userModel.getMobile_code()+userModel.getMobile_number(),
                         60,
                         TimeUnit.SECONDS,
                         activity,
