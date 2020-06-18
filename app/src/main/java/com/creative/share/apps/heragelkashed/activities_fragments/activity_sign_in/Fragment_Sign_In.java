@@ -131,96 +131,15 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
         if (loginModel.isDataValid(activity))
         {
             Common.CloseKeyBoard(activity,binding.edtPhone);
-            login(loginModel);
+            UserModel userModel=new UserModel();
+            userModel.setMobile_code(binding.tvCode.getText().toString());
+            userModel.setMobile_number(binding.edtPhone.getText().toString());
+            //Log.e("lllll",loginModel.getPhone());
+            CreateDialogAlert(userModel);
+            //login(loginModel);
         }
     }
 
-    private void login(LoginModel loginModel) {
-
-        ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-        try {
-
-            Api.getService(Tags.base_url)
-                    .login(loginModel.getPhone_code(),loginModel.getPhone(),1)
-                    .enqueue(new Callback<UserModel>() {
-                        @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                            dialog.dismiss();
-                            if (response.isSuccessful()&&response.body()!=null)
-                            {
-                                preferences.create_update_userData(activity,response.body());
-                                preferences.createSession(activity, Tags.session_login);
-
-                                if (!activity.isOut)
-                                {
-                                    Intent intent = new Intent(activity, HomeActivity.class);
-                                    startActivity(intent);
-                                }
-
-
-                                activity.finish();
-
-                            }else
-                            {
-
-                                if (response.code() == 500) {
-                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
-
-
-                                }else if (response.code()==401)
-                                {
-                                    try {
-                                        UserModel userModel = new Gson().fromJson(response.errorBody().string(),UserModel.class);
-                                        CreateDialogAlert(userModel);
-
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }else if (response.code()==402)
-                                {
-                                    Toast.makeText(activity, R.string.blokced, Toast.LENGTH_SHORT).show();
-
-                                }else
-                                {
-                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-
-                                    try {
-
-                                        Log.e("error",response.code()+"_"+response.errorBody().string());
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
-                            try {
-                                dialog.dismiss();
-                                if (t.getMessage()!=null)
-                                {
-                                    Log.e("error",t.getMessage());
-                                    if (t.getMessage().toLowerCase().contains("failed to connect")||t.getMessage().toLowerCase().contains("unable to resolve host"))
-                                    {
-                                        Toast.makeText(activity,R.string.something, Toast.LENGTH_SHORT).show();
-                                    }else
-                                    {
-                                        Toast.makeText(activity,t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                            }catch (Exception e){}
-                        }
-                    });
-        }catch (Exception e){
-            dialog.dismiss();
-
-        }
-    }
 
     private  void CreateDialogAlert(UserModel userModel) {
         final AlertDialog dialog = new AlertDialog.Builder(activity)

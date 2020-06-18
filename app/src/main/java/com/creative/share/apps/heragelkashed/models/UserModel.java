@@ -14,6 +14,13 @@ public class UserModel implements Serializable {
     private int confirmation_code;
     private int is_confirmed;
 
+    public void setMobile_code(String mobile_code) {
+        this.mobile_code = mobile_code;
+    }
+
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
+    }
 
     public int getId() {
         return id;
