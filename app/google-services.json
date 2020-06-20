@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "75220691866",
+    "firebase_url": "https://heragelkashed-e3f25.firebaseio.com",
+    "project_id": "heragelkashed-e3f25",
+    "storage_bucket": "heragelkashed-e3f25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75220691866:android:2266bb466f86f0adfee823",
+        "android_client_info": {
+          "package_name": "com.creative.share.apps.heragelawal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75220691866-o08b30uaivmifqggcb4h640ilv72kbrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKcj2RGjLHZO4J4o3Usqk_sJ9oTJmI3CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75220691866-o08b30uaivmifqggcb4h640ilv72kbrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
