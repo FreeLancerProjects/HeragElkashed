@@ -1182,6 +1182,8 @@ public class AddAdsActivity extends AppCompatActivity implements OnMapReadyCallb
             startLocationUpdate();
 
         } else if (requestCode == read_req && resultCode == Activity.RESULT_OK && data != null) {
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            imagesEncodedList = new ArrayList<String>();
             if(data.getData()!=null){
             Uri uri = data.getData();
             String path = Common.getImagePath(this, uri);
@@ -1193,26 +1195,27 @@ public class AddAdsActivity extends AppCompatActivity implements OnMapReadyCallb
             closeSheet();}
             else{
 
-                    if (data.getClipData() != null) {
-                        ClipData mClipData = data.getClipData();
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+                if (data.getClipData() != null) {
+                    ClipData mClipData = data.getClipData();
+                    ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                    for (int i = 0; i < mClipData.getItemCount(); i++) {
 
-                            ClipData.Item item = mClipData.getItemAt(i);
-                            Uri uri = item.getUri();
-                            adImageVideoModelList.add(new AdImageVideoModel(false, uri.toString()));
-                            // Get the cursor
-                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-                            // Move to first row
-                            cursor.moveToFirst();
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+                        mArrayUri.add(uri);
+                        // Get the cursor
+                        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+                        // Move to first row
+                        cursor.moveToFirst();
 
-                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            imageEncoded  = cursor.getString(columnIndex);
-                            imagesEncodedList.add(imageEncoded);
-                            cursor.close();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        imageEncoded = cursor.getString(columnIndex);
+                        imagesEncodedList.add(imageEncoded);
+                        cursor.close();
 
-                        }
-                       // Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
                     }
+                    Log.v("MainActivity", "Selected Images" + mArrayUri.size());
+                }
 
             }
             }
