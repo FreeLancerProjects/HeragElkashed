@@ -1182,6 +1182,7 @@ public class AddAdsActivity extends AppCompatActivity implements OnMapReadyCallb
             startLocationUpdate();
 
         } else if (requestCode == read_req && resultCode == Activity.RESULT_OK && data != null) {
+            if(data.getData()!=null){
             Uri uri = data.getData();
             String path = Common.getImagePath(this, uri);
             adImageVideoModelList.add(new AdImageVideoModel(false, uri.toString()));
@@ -1189,7 +1190,32 @@ public class AddAdsActivity extends AppCompatActivity implements OnMapReadyCallb
             addAdModel.setImages(adImageVideoModelList);
             binding.setAddAdModel(addAdModel);
             setAdapterData();
-            closeSheet();
+            closeSheet();}
+            else{
+
+                    if (data.getClipData() != null) {
+                        ClipData mClipData = data.getClipData();
+                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+
+                            ClipData.Item item = mClipData.getItemAt(i);
+                            Uri uri = item.getUri();
+                            adImageVideoModelList.add(new AdImageVideoModel(false, uri.toString()));
+                            // Get the cursor
+                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+                            // Move to first row
+                            cursor.moveToFirst();
+
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            imageEncoded  = cursor.getString(columnIndex);
+                            imagesEncodedList.add(imageEncoded);
+                            cursor.close();
+
+                        }
+                       // Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
+                    }
+
+            }
+            }
 
         } else if (requestCode == camera_req && resultCode == Activity.RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
